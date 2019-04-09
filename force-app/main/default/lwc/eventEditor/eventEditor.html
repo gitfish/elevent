@@ -1,0 +1,30 @@
+<template>
+    <lightning-input value={event.Subject} onchange={onSubjectChange} label="Subject"></lightning-input>
+    <lightning-textarea value={event.Description} onchange={onDescriptionChange} label="Description"></lightning-textarea>
+    <template if:true={event.IsAllDayEvent}>
+        <lightning-input type="date" value={event.StartDateTime} onchange={onStartChange} label="Start"></lightning-input>
+    </template>
+    <template if:false={event.IsAllDayEvent}>
+        <lightning-input type="datetime" value={event.StartDateTime} onchange={onStartChange} label="Start"></lightning-input>
+    </template>
+    <template if:true={event.IsAllDayEvent}>
+        <lightning-input type="date" value={event.StartDateTime} label="End" disabled></lightning-input>
+    </template>
+    <template if:false={event.IsAllDayEvent}>
+        <lightning-input type="datetime" value={event.EndDateTime} onchange={onEndChange} label="End"></lightning-input>
+    </template>
+    <lightning-input type="checkbox" checked={event.IsAllDayEvent} onchange={onAllDayEventChange} label="All-Day Event"></lightning-input>
+    <div>
+        <lightning-button label="Save" onclick={onSave} variant="brand"></lightning-button>
+    </div>
+    <div>
+        <c-flexi-combo></c-flexi-combo>
+    </div>
+    <div style="margin-top: 8px;">
+        <c-search-box search-handler={testSearchHandler}
+                      onsearchstart={onSearchStart}
+                      onsearchend={onSearchEnd}
+                      onsearcherror={onSearchError}></c-search-box>
+    </div>
+    <pre>{eventJSON}</pre>
+</template>

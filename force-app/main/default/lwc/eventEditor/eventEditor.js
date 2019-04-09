@@ -39,7 +39,7 @@ export default class EventEditor extends LightningElement {
     };
 
     onSearchStart(event) {
-        console.log("-- Search Start: " + event.detail.id);
+        console.log(`-- Search Start:  ${event.detail.id}: ${event.detail.input}`);
     }
 
     onSearchEnd(event) {
@@ -48,6 +48,10 @@ export default class EventEditor extends LightningElement {
 
     onSearchError(event) {
         console.log("-- Search Error: " + event.detail.error);
+    }
+
+    onSearchClick(event) {
+        console.log("-- Search Click");
     }
 
     get eventJSON() {

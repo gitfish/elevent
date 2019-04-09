@@ -96,7 +96,7 @@ export default class SearchBox extends LightningElement {
         }, this.delay);
     }
 
-    onInputKeyUp(event) {
+    onKeyUp(event) {
         this.delayedSearch(event.target.value);
     }
 

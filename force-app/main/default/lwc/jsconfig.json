@@ -9,11 +9,23 @@
             "c/eventEditor": [
                 "eventEditor/eventEditor.js"
             ],
+            "c/listBox": [
+                "listBox/listBox.js"
+            ],
+            "c/listBoxItem": [
+                "listBoxItem/listBoxItem.js"
+            ],
             "c/searchCombo": [
                 "searchCombo/searchCombo.js"
             ],
+            "c/searchComboDemo": [
+                "searchComboDemo/searchComboDemo.js"
+            ],
             "c/util": [
                 "util/util.js"
+            ],
+            "c/listBoxOption": [
+                "listBoxOption/listBoxOption.js"
             ]
         }
     },

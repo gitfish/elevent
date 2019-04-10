@@ -42,7 +42,9 @@ export default class FlexiCombo extends LightningElement {
             this.searchId = searchId;
             this.searchHandler.search(value).then(result => {
                 if(this.searchId === searchId) {
-                    this.searchResul
+                    this.dispatchEvent({
+                        
+                    })
                 }
             }).catch(err => {
                 if(this.searchId === searchId) {

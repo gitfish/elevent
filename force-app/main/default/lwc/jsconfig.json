@@ -3,14 +3,17 @@
         "experimentalDecorators": true,
         "baseUrl": ".",
         "paths": {
+            "c/comboContainer": [
+                "comboContainer/comboContainer.js"
+            ],
             "c/eventEditor": [
                 "eventEditor/eventEditor.js"
             ],
             "c/flexiCombo": [
                 "flexiCombo/flexiCombo.js"
             ],
-            "c/searchBox": [
-                "searchBox/searchBox.js"
+            "c/searchCombo": [
+                "searchCombo/searchCombo.js"
             ],
             "c/util": [
                 "util/util.js"

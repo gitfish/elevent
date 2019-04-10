@@ -8,13 +8,13 @@ const nextSearchId = () => {
     return Id.next(ID_PREFIX);
 };
 
-export default class SearchBox extends LightningElement {
+export default class SearchCombo extends LightningElement {
+
+    @api
+    label;
 
     @api
     placeholder = "Search...";
-
-    @api
-    additionalClass;
 
     @api
     delay = 500;
@@ -33,12 +33,41 @@ export default class SearchBox extends LightningElement {
         timeout: undefined
     };
 
-    get className() {
-        const classes = ["slds-input"];
-        if(this.additionalClass) {
-            classes.push(this.additionalClass);
+    @track
+    open = false;
+
+    _inputId;
+
+    get inputId() {
+        if(!this._inputId) {
+            this._inputId = Id.next("search-combo-input");
+        }
+        return this._inputId;
+    }
+
+    _listBoxId;
+
+    get listBoxId() {
+        if(!this._listBoxId) {
+            this._listBoxId = Id.next("search-combo-listbox");
+        }
+        return this._listBoxId;
+    }
+
+    get comboClassName() {
+        const classes = [
+            "slds-combobox",
+            "slds-dropdown-trigger",
+            "slds-dropdown-trigger_click"
+        ];
+        if(this.open) {
+            classes.push("slds-is-open");
         }
         return classes.join(" ");
+    }
+
+    toggleOpen() {
+        this.open = !this.open;
     }
 
     async search(input) {
@@ -48,7 +77,6 @@ export default class SearchBox extends LightningElement {
         this.state.searching = true;
         this.dispatchEvent(new CustomEvent("searchstart", {
             detail: {
-                id: searchId,
                 input: input
             }
         }));
@@ -57,24 +85,22 @@ export default class SearchBox extends LightningElement {
             if(this.state.id === searchId) {
                 this.dispatchEvent(new CustomEvent("searchend", {
                     detail: {
-                        id: searchId,
                         input: input,
                         result: result
                     }
                 }));
+                this.state.searching = false;
             }
         } catch(err) {
             if(this.state.id === searchId) {
                 this.dispatchEvent(new CustomEvent("searcherror", {
                     detail: {
-                        id: searchId,
                         input: input,
                         error: err
                     }
                 }));
+                this.state.searching = false;
             }
-        } finally {
-            this.state.searching = false;
         }
     }
 
@@ -96,8 +122,36 @@ export default class SearchBox extends LightningElement {
         }, this.delay);
     }
 
-    onKeyUp(event) {
-        this.delayedSearch(event.target.value);
+    onInputKeyUp(event) {
+        if(event.key === "Escape" || event.key === "Enter") {
+            this.open = false;
+        } else {
+            this.delayedSearch(event.target.value);
+        }
     }
 
+    onInputClick(event) {
+        event.stopPropagation();
+        this.open = true;
+    }
+
+    onInputFocus() {
+        this.open = true;
+    }
+
+    onDropDownClick(event) {
+        event.stopPropagation();
+    }
+
+    onDocumentClick = () => {
+        this.open = false;
+    };
+
+    connectedCallback() {
+        document.addEventListener("click", this.onDocumentClick);
+    }
+
+    disconnectedCallback() {
+        document.removeEventListener("click", this.onDocumentClick);
+    }
 }

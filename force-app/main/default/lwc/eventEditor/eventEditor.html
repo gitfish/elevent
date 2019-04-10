@@ -17,15 +17,16 @@
     <div>
         <lightning-button label="Save" onclick={onSave} variant="brand"></lightning-button>
     </div>
-    <div>
+    <div style="margin-top: 20px;">
         <c-flexi-combo></c-flexi-combo>
     </div>
-    <div style="margin-top: 8px;">
-        <c-search-box search-handler={testSearchHandler}
-                      onsearchstart={onSearchStart}
-                      onsearchend={onSearchEnd}
-                      onsearcherror={onSearchError}
-                      onclick={onSearchClick}></c-search-box>
+    <div style="margin-top: 20px;">
+        <c-search-combo label="Search Sample"
+                        search-handler={testSearchHandler}
+                        onsearchstart={onSearchStart}
+                        onsearchend={onSearchEnd}>
+            Here's the default content
+        </c-search-combo>
     </div>
     <pre>{eventJSON}</pre>
 </template>

@@ -1,5 +1,5 @@
 import { LightningElement, api } from 'lwc';
-import { Lang } from "c/util";
+import { Lang, String, StringFilters } from "c/util";
 
 export default class ListBoxOption extends LightningElement {
 
@@ -14,7 +14,7 @@ export default class ListBoxOption extends LightningElement {
         if(this.variant) {
             let vs;
             if(Lang.isString(this.variant)) {
-                vs = [this.variant];
+                vs = String.split(this.variant, StringFilters.isWhitespace);
             } else if(Lang.isArray(this.variant)) {
                 vs = this.variant;
             }

@@ -26,6 +26,9 @@
             ],
             "c/listBoxOption": [
                 "listBoxOption/listBoxOption.js"
+            ],
+            "c/searchListBox": [
+                "searchListBox/searchListBox.js"
             ]
         }
     },

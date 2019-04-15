@@ -1,4 +1,5 @@
 import { LightningElement, api } from 'lwc';
+import { Style } from "c/util";
 
 export default class ListBox extends LightningElement {
 
@@ -9,13 +10,6 @@ export default class ListBox extends LightningElement {
     variant = "vertical";
 
     get className() {
-        const r = ["slds-listbox"];
-        if(this.variant) {
-            r.push(`slds-listbox_${this.variant}`);
-        }
-        if(this.additionalClass) {
-            r.push(this.additionalClass);
-        }
-        return r.join(" ");
+        return Style.className({ className: "slds-listbox", variant: this.variant }, this.additionalClass);
     }
 }

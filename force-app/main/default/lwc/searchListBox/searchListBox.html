@@ -1,3 +1,32 @@
 <template>
-    
+    <c-list-box>
+        <slot name="header"></slot>
+        <template if:true={searching}>
+            <slot name="searching">
+                <c-list-box-item>
+                    <lightning-spinner alternative-text="Searching..."></lightning-spinner>
+                </c-list-box-item>
+            </slot>
+        </template>
+        <template if:true={hasSearched}>
+            <template if:true={resultEmpty}>
+                <slot name="emptyResult">
+                    <c-list-box-item>
+                        No records found
+                    </c-list-box-item>
+                </slot>
+            </template>
+            <template if:false={resultEmpty}>
+                <slot>
+                    <template for:each={result} for:item="item">
+                        <c-list-box-option key={item.id} value={item} onselect={onSelectOption}></c-list-box-option>
+                    </template>
+                </slot>
+            </template>
+        </template>
+        <template if:false={hasSearched}>
+            <slot name="defaultContent"></slot>
+        </template>
+        <slot name="footer"></slot>
+    </c-list-box>
 </template>

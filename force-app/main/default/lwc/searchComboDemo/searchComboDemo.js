@@ -38,24 +38,29 @@ export default class SearchComboDemo extends LightningElement {
         return new Promise((resolve) => {
             window.setTimeout(() => {
                 resolve(sampleData.filter(d => {
-                    return String.containsIgnoreCase(d.firstName, input) || String.containsIgnoreCase(d.lastName, input);
+                    return String.containsIgnoreCase(d.firstName + " " + d.lastName, input);
                 }));
-            }, 1000);
+            }, 800);
         });
     };
 
     onSearchStart(event) {
-        this.hasSearched = true;
         this.searching = true;
     }
 
     onSearchEnd(event) {
         this.result = event.detail.result;
         this.searching = false;
+        this.hasSearched = true;
     }
 
     onSearchError(event) {
         this.error = event.detail.error;
         this.searching = false;
+        this.hasSearched = true;
+    }
+
+    onSelectItem(event) {
+        console.log(`-- Item Selected: ${JSON.stringify(event.detail.value)}`);
     }
 }

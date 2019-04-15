@@ -1,7 +1,19 @@
 import { LightningElement, api } from 'lwc';
-import { Lang, String, StringFilters } from "c/util";
+import { Style } from "c/util";
 
 export default class ListBoxOption extends LightningElement {
+
+    @api
+    value;
+
+    @api
+    valueTitleResolver;
+
+    @api
+    iconName;
+
+    @api
+    iconSize = "small";
 
     @api
     additionalClass;
@@ -9,25 +21,19 @@ export default class ListBoxOption extends LightningElement {
     @api
     variant;
 
-    get className() {
-        const r = ["slds-listbox__option"];
-        if(this.variant) {
-            let vs;
-            if(Lang.isString(this.variant)) {
-                vs = String.split(this.variant, StringFilters.isWhitespace);
-            } else if(Lang.isArray(this.variant)) {
-                vs = this.variant;
-            }
-            if(vs) {
-                vs.forEach(v => {
-                    r.push(`slds-listbox__option_${v}`);
-                });
-            }
-        }
-        if(this.additionalClass) {
-            r.push(this.additionalClass);
-        }
+    get valueTitle() {
+        return this.value ? this.valueTitleResolver ? this.valueTitleResolver(this.value) : this.value.title || this.value.label : undefined;
+    }
 
-        return r.join(" ");
+    get className() {
+        return Style.className("slds-media", { className: "slds-listbox__option", variant: this.variant }, this.additionalClass);
+    }
+
+    onclick() {
+        this.dispatchEvent(new CustomEvent("select", {
+            detail: {
+                value: this.value
+            }
+        }));
     }
 }

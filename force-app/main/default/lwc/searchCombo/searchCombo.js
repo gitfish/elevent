@@ -1,6 +1,6 @@
 /* eslint-disable @lwc/lwc/no-async-operation */
 import { LightningElement, track, api } from 'lwc';
-import { Id, String } from "c/util";
+import { Id, String, Style } from "c/util";
 
 const ID_PREFIX = "search";
 
@@ -33,7 +33,7 @@ export default class SearchCombo extends LightningElement {
         timeout: undefined
     };
 
-    @track
+    @api
     open = false;
 
     _inputId;
@@ -55,15 +55,14 @@ export default class SearchCombo extends LightningElement {
     }
 
     get comboClassName() {
-        const classes = [
+        return Style.className(
             "slds-combobox",
             "slds-dropdown-trigger",
-            "slds-dropdown-trigger_click"
-        ];
-        if(this.open) {
-            classes.push("slds-is-open");
-        }
-        return classes.join(" ");
+            "slds-dropdown-trigger_click",
+            {
+                "slds-is-open": this.open
+            }
+        );
     }
 
     toggleOpen() {

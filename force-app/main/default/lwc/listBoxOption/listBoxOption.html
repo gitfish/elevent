@@ -1,7 +1,18 @@
 <template>
-    <c-list-box-item>
+    <c-list-box-item onclick={onclick}>
         <div class={className} role="option">
-            <slot></slot>
+            <span class="slds-media__figure slds-listbox__option-icon">
+                <template if:true={iconName}>
+                    <span class="slds-icon_container">
+                        <lightning-icon icon-name={iconName} size={iconSize}></lightning-icon>
+                    </span>
+                </template>
+            </span>
+            <span class="slds-media__body">
+                <slot>
+                    <span class="slds-trun`cate" title={valueTitle}>{valueLabel}</span>
+                </slot>
+            </span>
         </div>
     </c-list-box-item>
 </template>

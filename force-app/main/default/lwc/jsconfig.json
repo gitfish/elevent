@@ -15,20 +15,26 @@
             "c/listBoxItem": [
                 "listBoxItem/listBoxItem.js"
             ],
+            "c/listBoxOption": [
+                "listBoxOption/listBoxOption.js"
+            ],
+            "c/listBoxOptionMeta": [
+                "listBoxOptionMeta/listBoxOptionMeta.js"
+            ],
+            "c/listBoxOptionText": [
+                "listBoxOptionText/listBoxOptionText.js"
+            ],
             "c/searchCombo": [
                 "searchCombo/searchCombo.js"
             ],
             "c/searchComboDemo": [
                 "searchComboDemo/searchComboDemo.js"
             ],
-            "c/util": [
-                "util/util.js"
-            ],
-            "c/listBoxOption": [
-                "listBoxOption/listBoxOption.js"
-            ],
             "c/searchListBox": [
                 "searchListBox/searchListBox.js"
+            ],
+            "c/util": [
+                "util/util.js"
             ]
         }
     },
